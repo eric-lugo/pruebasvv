@@ -190,4 +190,59 @@ public class PlayerTest {
 
         assertEquals(0, getDxPrivate(player));
     }
+
+    //todo: tests keyReleased()
+
+    @Test
+    public void testKeyReleasedIzquierda(){  //!: falla
+        setDxPrivate(player, -2);
+        KeyEvent eventLeftReleased = new KeyEvent(
+                component,
+                KeyEvent.KEY_RELEASED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_LEFT,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyReleased(eventLeftReleased);
+
+        assertEquals(0, getDxPrivate(player));
+    }
+
+    @Test
+    public void testKeyReleasedDerecha(){
+        setDxPrivate(player, 2);
+        KeyEvent eventRightReleased = new KeyEvent(
+                component,
+                KeyEvent.KEY_RELEASED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_RIGHT,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyReleased(eventRightReleased);
+
+        assertEquals(0, getDxPrivate(player));
+    }
+
+    @Test
+    public void testKeyReleasedNoValido(){
+        setDxPrivate(player, 2);
+        KeyEvent eventSpacePressed = new KeyEvent(
+                component,
+                KeyEvent.KEY_RELEASED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_SPACE,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyReleased(eventSpacePressed);
+
+        assertEquals(2, getDxPrivate(player));
+    }
+
+
 }
