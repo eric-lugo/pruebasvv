@@ -3,6 +3,9 @@ package main.Player;
 import main.Commons;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,10 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
     Player player;
+    private Component component;
 
     @BeforeEach
     void setUp() {
         player = new Player();
+        component = new Component() {};
     }
 
     private void setDxPrivate(Player player, int dx) {
@@ -30,6 +35,21 @@ public class PlayerTest {
             dxPublic.setInt(player, dx);
         } catch (Exception e) {
             throw new RuntimeException("Error al modificar dx", e);
+        }
+    }
+
+    private int getDxPrivate(Player player) {
+        try {
+            Field dx;
+            try {
+                dx = Player.class.getDeclaredField("dx");
+            } catch (NoSuchFieldException e) {
+                dx = Player.class.getSuperclass().getDeclaredField("dx"); //! getSuperclass es obligatiorio?
+            }
+            dx.setAccessible(true);
+            return dx.getInt(player);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al leer dx", e);
         }
     }
 
@@ -58,6 +78,7 @@ public class PlayerTest {
     }
 
     //todo: separados los tests de act
+    //importante: fallan todos, tenemos que cambiar width?
     @Test
     public void testActSinMovimiento(){
         player.setX(179);
@@ -116,4 +137,57 @@ public class PlayerTest {
     }
 
     //todo: ??
+
+    //todo: tests keyPressed
+
+    @Test
+    public void testKeyPressedIzquierda(){
+        setDxPrivate(player, 0);
+        KeyEvent eventLeftPressed = new KeyEvent(
+                component,
+                KeyEvent.KEY_PRESSED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_LEFT,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyPressed(eventLeftPressed);
+
+        assertEquals(-2, getDxPrivate(player));
+    }
+
+    @Test
+    public void testKeyPressedDerecha(){
+        setDxPrivate(player, 0);
+        KeyEvent eventRightPressed = new KeyEvent(
+                component,
+                KeyEvent.KEY_PRESSED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_RIGHT,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyPressed(eventRightPressed);
+
+        assertEquals(2, getDxPrivate(player));
+    }
+
+    @Test
+    public void testKeyPressedNoValido(){
+        setDxPrivate(player, 0);
+        KeyEvent eventSpacePressed = new KeyEvent(
+                component,
+                KeyEvent.KEY_PRESSED,
+                System.currentTimeMillis(),
+                0,
+                KeyEvent.VK_SPACE,
+                KeyEvent.CHAR_UNDEFINED
+        );
+
+        player.keyPressed(eventSpacePressed);
+
+        assertEquals(0, getDxPrivate(player));
+    }
 }
