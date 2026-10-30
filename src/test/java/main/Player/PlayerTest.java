@@ -26,11 +26,7 @@ public class PlayerTest {
     private void setDxPrivate(Player player, int dx) {
         try {
             Field dxPublic;
-            try {
-                dxPublic = Player.class.getDeclaredField("dx");
-            } catch (NoSuchFieldException e) {
-                dxPublic = Player.class.getSuperclass().getDeclaredField("dx");
-            }
+            dxPublic = Player.class.getSuperclass().getDeclaredField("dx");
             dxPublic.setAccessible(true);
             dxPublic.setInt(player, dx);
         } catch (Exception e) {
@@ -38,22 +34,17 @@ public class PlayerTest {
         }
     }
 
+
     private int getDxPrivate(Player player) {
         try {
             Field dx;
-            try {
-                dx = Player.class.getDeclaredField("dx");
-            } catch (NoSuchFieldException e) {
-                dx = Player.class.getSuperclass().getDeclaredField("dx"); //! getSuperclass es obligatiorio?
-            }
+            dx = Player.class.getSuperclass().getDeclaredField("dx");
             dx.setAccessible(true);
             return dx.getInt(player);
         } catch (Exception e) {
             throw new RuntimeException("Error al leer dx", e);
         }
     }
-
-
 
     @Test
     public void testInitPlayer(){
@@ -77,8 +68,6 @@ public class PlayerTest {
         assertEquals(yEsperado, player.getY());
     }
 
-    //todo: separados los tests de act
-    //importante: fallan todos, tenemos que cambiar width?
     @Test
     public void testActSinMovimiento(){
         player.setX(179);
@@ -119,7 +108,6 @@ public class PlayerTest {
         assertEquals(0, player.getX());
     }
 
-    //todo: estos dos deberíamos probarlos ??
     @Test
     public void testActDerNoMovimiento(){
         player.setX(343);
@@ -135,10 +123,6 @@ public class PlayerTest {
         player.act();
         assertEquals(0, player.getX());
     }
-
-    //todo: ??
-
-    //todo: tests keyPressed
 
     @Test
     public void testKeyPressedIzquierda(){
@@ -191,10 +175,8 @@ public class PlayerTest {
         assertEquals(0, getDxPrivate(player));
     }
 
-    //todo: tests keyReleased()
-
     @Test
-    public void testKeyReleasedIzquierda(){  //!: falla
+    public void testKeyReleasedIzquierda(){
         setDxPrivate(player, -2);
         KeyEvent eventLeftReleased = new KeyEvent(
                 component,
