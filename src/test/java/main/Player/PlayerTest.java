@@ -26,11 +26,7 @@ public class PlayerTest {
     private void setDxPrivate(Player player, int dx) {
         try {
             Field dxPublic;
-            try {
-                dxPublic = Player.class.getDeclaredField("dx");
-            } catch (NoSuchFieldException e) {
-                dxPublic = Player.class.getSuperclass().getDeclaredField("dx");
-            }
+            dxPublic = Player.class.getSuperclass().getDeclaredField("dx");
             dxPublic.setAccessible(true);
             dxPublic.setInt(player, dx);
         } catch (Exception e) {
@@ -38,21 +34,17 @@ public class PlayerTest {
         }
     }
 
+
     private int getDxPrivate(Player player) {
         try {
             Field dx;
-            try {
-                dx = Player.class.getDeclaredField("dx");
-            } catch (NoSuchFieldException e) {
-                dx = Player.class.getSuperclass().getDeclaredField("dx"); //! getSuperclass es obligatiorio?
-            }
+            dx = Player.class.getSuperclass().getDeclaredField("dx");
             dx.setAccessible(true);
             return dx.getInt(player);
         } catch (Exception e) {
             throw new RuntimeException("Error al leer dx", e);
         }
     }
-
 
 
     @Test
