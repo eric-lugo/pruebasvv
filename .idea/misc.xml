@@ -5,6 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/Space_Invaders_CodigoFuente/pom.xml" />
+        <option value="$PROJECT_DIR$/../Space-Invaders-2026/pom.xml" />
+        <option value="$PROJECT_DIR$/Space-Invaders-2026/pom.xml" />
       </list>
     </option>
   </component>
