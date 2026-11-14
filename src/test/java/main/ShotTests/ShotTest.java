@@ -3,6 +3,7 @@ package main.ShotTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import space_invaders.sprites.Alien;
 import space_invaders.sprites.Shot;
 import space_invaders.sprites.Sprite;
 
