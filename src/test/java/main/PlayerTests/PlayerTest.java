@@ -1,4 +1,4 @@
-package main.Player;
+package main.PlayerTests;
 
 import main.Commons;
 import org.junit.jupiter.api.BeforeEach;
