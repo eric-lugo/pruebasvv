@@ -21,7 +21,6 @@ class BoardUpdateShotsTest {
 
     private static final int ALIEN_X = 100;
     private static final int ALIEN_Y = 100;
-    // Punto central del alien: dentro de su rectángulo (ALIEN_WIDTH x ALIEN_HEIGHT)
     private static final int CENTRO_X = ALIEN_X + Commons.ALIEN_WIDTH / 2;
     private static final int CENTRO_Y = ALIEN_Y + Commons.ALIEN_HEIGHT / 2;
     private static final int DEATHS_INICIAL = 5;
