@@ -2,6 +2,7 @@ package BoardTests;
 
 import main.Board;
 import main.Commons;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,10 @@ import space_invaders.sprites.Alien;
 import space_invaders.sprites.Sprite;
 
 
+import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,10 +26,27 @@ public class UpdateAliensWhiteBox {
 
     @BeforeEach
     public void setUp() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            board = new Board();
+            board.getTimer().stop();
+        });
+        aliens= new ArrayList<>();
+        board.setAliens(aliens);
+
         metodo= Board.class.getDeclaredMethod("update_aliens");
         visibleAlien= Sprite.class.getDeclaredMethod("setVisible",boolean.class);
         metodo.setAccessible(true);
         visibleAlien.setAccessible(true);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+
+        SwingUtilities.invokeAndWait(() -> {
+            if (board != null && board.getTimer() != null) {
+                board.getTimer().stop();
+            }
+        });
     }
 
     @Test
@@ -74,7 +94,7 @@ public class UpdateAliensWhiteBox {
         Alien alien = new Alien(x, y);
         alien.setX(x);
         alien.setY(y);
-        visibleAlien.invoke(alien,false);
+        visibleAlien.invoke(alien,true);
 
         aliens.add(alien);
 
@@ -98,7 +118,7 @@ public class UpdateAliensWhiteBox {
         Alien alien = new Alien(x, y);
         alien.setX(x);
         alien.setY(y);
-        visibleAlien.invoke(alien,false);
+        visibleAlien.invoke(alien,true);
 
         aliens.add(alien);
 
