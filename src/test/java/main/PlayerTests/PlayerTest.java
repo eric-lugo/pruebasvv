@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import space_invaders.sprites.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,6 +126,26 @@ public class PlayerTest {
         player.act();
         assertEquals(0, player.getX());
     }
+
+    @ParameterizedTest(name = "{0}: x={1}, dx={2} -> xEsperado={3}")
+    @CsvSource({
+            "CP-PL03 (Movimiento derecha normal),      179,  2, 181",
+            "CP-PL04 (Mov. izq. hasta borde x=0),        2, -2,   0",
+            "CP-PL05 (Límite inferior sobrepasado),      0, -2,   0",
+            "CP-PL06 (Mov. der. hasta borde x=343),    341,  2, 343",
+            "CP-PL07 (Límite superior sobrepasado),    343,  2, 343",
+            "CP-PL08 (Sin movimiento dx=0),            179,  0, 179",
+            "CP-PL09 (Movimiento izquierda normal),    179, -2, 177"
+    })
+    public void testAct_CajaNegra(String idCaso, int xInicial, int dx, int xEsperado) {
+        player.setX(xInicial);
+        setDxPrivate(player, dx);
+
+        player.act();
+
+        assertEquals(xEsperado, player.getX());
+    }
+
 
     @Test
     public void testKeyPressedIzquierda(){

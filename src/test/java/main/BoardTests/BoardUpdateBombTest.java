@@ -181,8 +181,6 @@ class BoardUpdateBombTest {
         );
     }
 
-    // ---------- R8: con bomba activa no se crea otra ----------
-
     @Test
     @DisplayName("CP-UB07 [R8]: alien visible con bomba activa -> no se crea una bomba nueva")
     void cpUb07_noSeCreaConBombaActiva() throws Exception {
