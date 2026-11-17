@@ -126,8 +126,6 @@ class BoardUpdateTest {
         comprobarVictoria();
     }
 
-    /* ---------- Postcondición: coordinación de los métodos de actualización ---------- No si hara falta ahora, son pruebas baratas
-
     @Test
     @DisplayName("CP-UP08: update() ejecuta update_shots() -> el disparo sube")
     void cpUp08_ejecutaUpdateShots() throws Exception {
@@ -169,5 +167,4 @@ class BoardUpdateTest {
 
         assertTrue(alien.getX() > xAntes, "el alien debería haberse movido a la derecha");
     }
-     */
 }

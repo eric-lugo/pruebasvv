@@ -99,7 +99,6 @@ class BoardUpdateAliensTest {
 
         ejecutarUpdateAliens();
 
-        // A1 (desplazamiento en X) no se evalúa: la especificación no define el orden
         assertAll(
                 () -> assertEquals(-1, board.getDirection(), "A2: la dirección debe invertirse"),
                 () -> assertEquals(Y_NORMAL + Commons.GO_DOWN, enBorde.getY(), "A3: el alien del borde debe bajar"),
