@@ -5,9 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Player;
 import space_invaders.sprites.Shot;
-
-
 import static org.junit.jupiter.api.Assertions.*;
+import main.Commons;
+import space_invaders.sprites.Alien;
+import java.util.List;
 
 
 public class BoardInitTest {
@@ -33,6 +34,13 @@ public class BoardInitTest {
         assertNotNull(aliens);
         assertEquals(24, aliens.size());
 
+        for (int i = 0; i < aliens.size(); i++) {
+            Alien a = aliens.get(i);
+            System.out.println("Alien " + i
+                    + " -> X=" + a.getX()
+                    + ", Y=" + a.getY());
+        }
+
         int alienIndex = 0;
 
         for (int row = 0; row < Commons.ALIEN_ROWS; row++) {
@@ -53,7 +61,8 @@ public class BoardInitTest {
             }
         }
     }
-   */
+
+    */
 
 
     @Test
