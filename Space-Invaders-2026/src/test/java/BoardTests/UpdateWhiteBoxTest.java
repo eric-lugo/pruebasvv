@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UpdateWhiteBoxTest {
 
-    // Helper para invocar el método privado update() mediante Reflexión
     private void invokeUpdatePrivate(Board board) {
         try {
             Method updateMethod = Board.class.getDeclaredMethod("update");
@@ -24,7 +23,6 @@ public class UpdateWhiteBoxTest {
         }
     }
 
-    // Helper para modificar el atributo privado 'deaths'
     private void setDeathsPrivate(Board board, int deaths) {
         try {
             Field deathsField = Board.class.getDeclaredField("deaths");
@@ -35,7 +33,6 @@ public class UpdateWhiteBoxTest {
         }
     }
 
-    // Helper para leer el atributo privado 'inGame'
     private boolean getInGamePrivate(Board board) {
         try {
             Field inGameField = Board.class.getDeclaredField("inGame");
@@ -46,7 +43,6 @@ public class UpdateWhiteBoxTest {
         }
     }
 
-    // Helper para leer el atributo privado 'message'
     private String getMessagePrivate(Board board) {
         try {
             Field messageField = Board.class.getDeclaredField("message");
@@ -60,7 +56,6 @@ public class UpdateWhiteBoxTest {
     @Test
     @DisplayName("Camino 1: deaths = 0 (condicion verdadera)")
     void testCamino1_PartidaEnCurso() {
-        // 1. Instanciación del tablero (ejecuta gameInit())
         Board board = new Board();
 
         board.getTimer().stop();
@@ -69,13 +64,10 @@ public class UpdateWhiteBoxTest {
         board.setInGame(true);
         board.setMessage("Partida en curso");
 
-        // 2. Forzado del valor de la variable de entrada implícita 'deaths' a 0 (CP-UP02)
         setDeathsPrivate(board, 0);
 
-        // 3. Ejecución del método privado update()
         invokeUpdatePrivate(board);
 
-        // 4. Verificaciones del Camino 1: la partida continúa activa y el mensaje no cambia a victoria
         assertTrue(getInGamePrivate(board), "El estado del juego (inGame) debe permanecer en true cuando deaths es 0.");
         assertFalse("Game won!".equals(getMessagePrivate(board)), "El mensaje de estado no debe ser 'Game won!' mientras la partida siga activa.");
     }
@@ -83,7 +75,6 @@ public class UpdateWhiteBoxTest {
     @Test
     @DisplayName("Camino 2: deaths = 25 (condicion falsea)")
     void testCamino2_JuegoGanado() {
-        // 1. Instanciación del tablero
         Board board = new Board();
 
         board.getTimer().stop();
@@ -92,13 +83,10 @@ public class UpdateWhiteBoxTest {
         board.setInGame(true);
         board.setMessage("Partida en curso");
 
-        // 2. Forzado del valor de 'deaths' a 25 (CP-UP07, superando el límite de 24 muertes)
         setDeathsPrivate(board, 25);
 
-        // 3. Ejecución del método privado update()
         invokeUpdatePrivate(board);
 
-        // 4. Verificaciones del Camino 2: el juego finaliza y asigna el mensaje de victoria
         assertFalse(getInGamePrivate(board), "El estado del juego (inGame) debe pasar a false al alcanzarse la victoria (deaths >= 24).");
         assertEquals("Game won!", getMessagePrivate(board), "El mensaje de finalización debe ser exactamente 'Game won!'.");
     }

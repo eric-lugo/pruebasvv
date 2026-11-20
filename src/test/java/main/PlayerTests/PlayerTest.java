@@ -49,6 +49,16 @@ public class PlayerTest {
         }
     }
 
+
+    @Test
+    public void testPlayerConstrcutor() {
+        Player jugador = new Player();
+
+        assertEquals(179, jugador.getX());
+        assertEquals(280, jugador.getY());
+    }
+
+
     @Test
     public void testInitPlayer(){
         try{
