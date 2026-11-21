@@ -12,8 +12,8 @@ public class initAlieWhiteBox {
     void initAlien_test(String idCaso, int xEntrada, int yEntrada, int xEsperada, int yEsperada) {
         Alien alien = new Alien(xEntrada, yEntrada);
 
-        assertEquals(xEsperada, alien.getX(), "Falló la coordenada X en " + idCaso);
-        assertEquals(yEsperada, alien.getY(), "Falló la coordenada Y en " + idCaso);
+        assertEquals(xEsperada, alien.getX(), "FallÃ³ la coordenada X en " + idCaso);
+        assertEquals(yEsperada, alien.getY(), "FallÃ³ la coordenada Y en " + idCaso);
     }
 
     @Test
