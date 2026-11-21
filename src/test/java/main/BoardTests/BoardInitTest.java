@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Player;
 import space_invaders.sprites.Shot;
+import main.Commons;
+import space_invaders.sprites.Alien;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,8 +24,6 @@ public class BoardInitTest {
 
     }
 
-
-/*
     @Test
     @DisplayName("CP-B03: Posiciones iniciales de los aliens")
     public void testCP_B03_PosicionesInicialesAliens() {
@@ -53,7 +54,7 @@ public class BoardInitTest {
             }
         }
     }
-   */
+
 
 
     @Test
