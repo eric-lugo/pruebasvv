@@ -6,7 +6,7 @@ import space_invaders.sprites.Alien;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class initAlieWhiteBox {
+public class initAlienWhiteBox {
 
 
     void initAlien_test(String idCaso, int xEntrada, int yEntrada, int xEsperada, int yEsperada) {
