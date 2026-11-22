@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardInitTest {
 
     @Test
-    @DisplayName("CP-B02: Comprobar creaci髇 de 24 aliens")
+    @DisplayName("CP-B02: Comprobar creaci贸n de 24 aliens")
     public void testCP_B02_CreacionAliens() throws Exception {
         Board board = new Board();
 
@@ -58,7 +58,7 @@ public class BoardInitTest {
 
 
     @Test
-    @DisplayName("CP-B04: Posici髇 inicial del jugador")
+    @DisplayName("CP-B04: Posici贸n inicial del jugador")
     public void testCP_B04_PosicionInicialJugador() {
 
         Board board = new Board();
@@ -80,7 +80,7 @@ public class BoardInitTest {
 
         Shot shot = board.getShot();
 
-        assertNotNull(shot, "El objeto Shot debe estar instanciado tras la inicializaci髇 del tablero.");
+        assertNotNull(shot, "El objeto Shot debe estar instanciado tras la inicializaci贸n del tablero.");
     }
 
     @Test
@@ -91,10 +91,10 @@ public class BoardInitTest {
         assertNotNull(board, "La instancia de Board debe haberse creado correctamente.");
 
         assertNotNull(board.getPlayer(), "El jugador (Player) debe estar inicializado tras instanciar el tablero.");
-        assertNotNull(board.getShot(), "El objeto disparo (Shot) debe estar inicializado tras la instanciaci髇.");
-        assertNotNull(board.getAliens(), "La lista de alien韌enas no debe ser nula tras la inicializaci髇.");
+        assertNotNull(board.getShot(), "El objeto disparo (Shot) debe estar inicializado tras la instanciaci贸n.");
+        assertNotNull(board.getAliens(), "La lista de alien铆genas no debe ser nula tras la inicializaci贸n.");
 
-        assertFalse(board.getAliens().isEmpty(), "La lista de alien韌enas no debe estar vac韆 al iniciar el juego.");
+        assertFalse(board.getAliens().isEmpty(), "La lista de alien锟絞enas no debe estar vac锟絘 al iniciar el juego.");
     }
 
 }
