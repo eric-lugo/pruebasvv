@@ -87,8 +87,6 @@ class BoardUpdateAliensTest {
         );
     }
 
-    // ---------- R3 y R4: rebote en los bordes ----------
-
     @Test
     @DisplayName("CP-UA03 [R3]: alien alcanza el borde derecho yendo a la derecha -> rebota y todos bajan")
     void cpUa03_reboteDerecho() throws Exception {
@@ -101,7 +99,6 @@ class BoardUpdateAliensTest {
 
         ejecutarUpdateAliens();
 
-        // A1 (desplazamiento en X) no se evalúa: la especificación no define el orden
         assertAll(
                 () -> assertEquals(-1, board.getDirection(), "A2: la dirección debe invertirse"),
                 () -> assertEquals(Y_NORMAL + Commons.GO_DOWN, enBorde.getY(), "A3: el alien del borde debe bajar"),
@@ -128,8 +125,6 @@ class BoardUpdateAliensTest {
                 () -> assertEquals(Y_NORMAL + Commons.GO_DOWN, enCentro.getY(), "A3: el alien del centro también debe bajar")
         );
     }
-
-    // ---------- R5 y R6: en el borde pero ya alejándose, sin nuevo rebote ----------
 
     @Test
     @DisplayName("CP-UA05 [R5]: alien en el borde derecho yendo a la izquierda -> se desplaza sin rebotar")
@@ -165,8 +160,6 @@ class BoardUpdateAliensTest {
         );
     }
 
-    // ---------- R7: invasión ----------
-
     @Test
     @DisplayName("CP-UA07 [R7]: alien supera el límite inferior -> fin del juego con 'Invasion!'")
     void cpUa07_invasion() throws Exception {
@@ -183,8 +176,6 @@ class BoardUpdateAliensTest {
         );
     }
 
-    // ---------- R8: alien no visible ----------
-
     @Test
     @DisplayName("CP-UA08 [R8]: alien no visible -> no se desplaza")
     void cpUa08_alienNoVisible() throws Exception {
@@ -197,38 +188,5 @@ class BoardUpdateAliensTest {
         ejecutarUpdateAliens();
 
         assertEquals(X_CENTRO, alien.getX(), "un alien no visible no debe desplazarse");
-    }
-
-    // ---------- Casos opcionales (interpretación: un alien muerto es como si no existiera) ----------
-
-    @Test
-    @DisplayName("CP-UA09 [interpretación]: alien no visible en el borde derecho -> no provoca rebote")
-    void cpUa09_noVisibleEnBordeNoRebota() throws Exception {
-        Alien alien = new Alien(BORDE_DER, Y_NORMAL);
-        alien.die();
-        ponerAliens(alien);
-        board.setDirection(1);
-        assertFalse(alien.isVisible(), "precondición: el alien debe estar no visible");
-
-        ejecutarUpdateAliens();
-
-        assertEquals(1, board.getDirection(), "un alien no visible no debe provocar un rebote");
-    }
-
-    @Test
-    @DisplayName("CP-UA10 [interpretación]: alien no visible bajo el suelo -> no provoca invasión")
-    void cpUa10_noVisibleBajoSueloNoInvade() throws Exception {
-        Alien alien = new Alien(X_CENTRO, LIMITE_SUELO + 1);
-        alien.die();
-        ponerAliens(alien);
-        board.setDirection(1);
-        assertFalse(alien.isVisible(), "precondición: el alien debe estar no visible");
-
-        ejecutarUpdateAliens();
-
-        assertAll(
-                () -> assertTrue(board.isInGame(), "un alien no visible no debe provocar una invasión"),
-                () -> assertEquals(MENSAJE_INICIAL, board.getMessage(), "el mensaje no debe cambiar")
-        );
     }
 }

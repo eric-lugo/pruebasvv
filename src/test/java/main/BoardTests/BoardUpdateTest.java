@@ -16,16 +16,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Caja negra - Board.update()
- * Técnica: Robust Boundary Value Testing sobre deaths (entrada implícita)
- *
- * deaths en [0, NUMBER_OF_ALIENS_TO_DESTROY] = [0, 24]
- * Valores: -1, 0, 1, 12, 23, 24, 25  ->  6n + 1 = 7 casos (n = 1)
- *
- * Se prepara un estado neutro del tablero (un alien lejos de bordes y suelo,
- * disparo no visible) para que deaths sea la única causa de un cambio en inGame.
- */
 class BoardUpdateTest {
 
     private static final String MENSAJE_INICIAL = "Match ON";
@@ -55,7 +45,7 @@ class BoardUpdateTest {
         board.setDeaths(deaths);
     }
 
-    /** update() es privado: se invoca por reflexión. */
+    /* update_aliens() es privado --> se invoca por reflexión. */
     private void ejecutarUpdate() throws Exception {
         Method update = Board.class.getDeclaredMethod("update");
         update.setAccessible(true);
@@ -136,8 +126,6 @@ class BoardUpdateTest {
         comprobarVictoria();
     }
 
-    /* ---------- Postcondición: coordinación de los métodos de actualización ---------- No si hara falta ahora, son pruebas baratas
-
     @Test
     @DisplayName("CP-UP08: update() ejecuta update_shots() -> el disparo sube")
     void cpUp08_ejecutaUpdateShots() throws Exception {
@@ -179,5 +167,4 @@ class BoardUpdateTest {
 
         assertTrue(alien.getX() > xAntes, "el alien debería haberse movido a la derecha");
     }
-     */
 }
