@@ -125,5 +125,64 @@ public class UpdateBombWhiteBox {
         );
     }
 
+    @Test
+    @DisplayName("C5: [1,2,3,4,6,7,8,9,10,2,F] -> bomba impacta en el jugador")
+    void c5_bombaImpactaJugador() throws Exception {
+        Alien alien = new Alien(ALIEN_X, ALIEN_Y);
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setDestroyed(false);
+        bomb.setX(PLAYER_X + 2);
+        bomb.setY(PLAYER_Y + 2);
+        ponerAliens(alien);
+
+        Player player = board.getPlayer();
+        player.setX(PLAYER_X);
+        player.setY(PLAYER_Y);
+
+        ejecutarUpdateBomb();
+
+        assertAll(
+                () -> assertTrue(bomb.isDestroyed(), "la bomba debe destruirse tras impactar"),
+                () -> assertTrue(board.getShot().isDying(), "el shoot debe quedar en estado dying al impactar")
+        );
+    }
+
+    @Test
+    @DisplayName("C6: [1,2,3,4,6,7,10,11,12,2,F] -> bomba activa desciende sin llegar al suelo")
+    void c6_bombaDesciendeSinSuelo() throws Exception {
+        Alien alien = new Alien(ALIEN_X, ALIEN_Y);
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setDestroyed(false);
+        bomb.setX(100);
+        bomb.setY(100);
+        board.getPlayer().die();
+        ponerAliens(alien);
+
+        ejecutarUpdateBomb();
+
+        assertAll(
+                () -> assertEquals(100 / Commons.BOMB_SPEED, bomb.getY(), "la posición Y de la bomba debe actualizarse"),
+                () -> assertFalse(bomb.isDestroyed(), "la bomba no ha llegado al suelo y debe seguir activa")
+        );
+    }
+
+    @Test
+    @DisplayName("C7: [1,2,3,4,6,7,10,11,12,13,2,F] -> bomba activa alcanza el suelo y se destruye")
+    void c7_bombaLlegaAlSuelo() throws Exception {
+        Alien alien = new Alien(ALIEN_X, ALIEN_Y);
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setDestroyed(false);
+        bomb.setX(100);
+        int yIni = (Commons.GROUND - Commons.BOMB_HEIGHT);
+        bomb.setY(yIni);
+        board.getPlayer().die();
+        ponerAliens(alien);
+
+        ejecutarUpdateBomb();
+
+        assertTrue(bomb.isDestroyed(), "la bomba debe destruirse al alcanzar o superar el suelo");
+    }
+
+
 }
 
