@@ -51,7 +51,7 @@ public class PlayerTest {
 
 
     @Test
-    public void testPlayerConstrcutor() {
+    public void testPlayerConstructor() {
         Player jugador = new Player();
 
         assertEquals(179, jugador.getX());
