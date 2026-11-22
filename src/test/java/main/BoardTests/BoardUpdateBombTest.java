@@ -21,7 +21,7 @@ class BoardUpdateBombTest {
 
     private static final int ALIEN_X = 150;
     private static final int ALIEN_Y = 50;
-    private static final int PLAYER_X = 250;                       // lejos de la columna x = 50
+    private static final int PLAYER_X = 250;
     private static final int LIMITE_SUELO = Commons.GROUND - Commons.BOMB_HEIGHT;
     private static final int REPETICIONES = 500;
 
