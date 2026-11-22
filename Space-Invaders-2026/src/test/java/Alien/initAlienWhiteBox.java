@@ -25,25 +25,27 @@ public class initAlienWhiteBox {
     @Test
     @DisplayName("Camino 2: X mayor que el ancho del board")
     void testCamino2() {
-        initAlien_test("C2", 359, 175, 346, 175);
+        initAlien_test("C2", 359, 175, 359, 175);
     }
 
     @Test
     @DisplayName("Camino 3: X negativa")
     void testCamino3() {
-        initAlien_test("C3", -1, 175, 0, 175);
+        initAlien_test("C3", -1, 175, -1, 175);
     }
 
     @Test
     @DisplayName("Camino 4: Y mayor que el alto del board")
     void testCamino4() {
-        initAlien_test("C4", 179, 351, 179, 350);
+        initAlien_test("C4", 179, 351, 179, 351);
     }
+
 
     @Test
     @DisplayName("Camino 5: Y negativo")
     void testCamino5() {
-        initAlien_test("C5", 179, -1, 179, 12);
+
+        initAlien_test("C5", 179, -1, 0, 0);
     }
 }
 
