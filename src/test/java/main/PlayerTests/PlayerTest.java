@@ -83,13 +83,15 @@ public class PlayerTest {
 
     @ParameterizedTest(name = "{0}: x={1}, dx={2} -> xEsperado={3}")
     @CsvSource({
-            "CP-PL03 (Movimiento derecha normal),      179,  2, 181",
-            "CP-PL04 (Mov. izq. hasta borde x=0),        2, -2,   0",
-            "CP-PL05 (Límite inferior sobrepasado),      0, -2,   0",
-            "CP-PL06 (Mov. der. hasta borde x=343),    341,  2, 343",
-            "CP-PL07 (Límite superior sobrepasado),    343,  2, 343",
-            "CP-PL08 (Sin movimiento dx=0),            179,  0, 179",
-            "CP-PL09 (Movimiento izquierda normal),    179, -2, 177"
+            "CP-AP01, 5, -2,   5",
+            "CP-AP02, 5,  0,   2",
+            "CP-AP03, 5,  2,   7",
+            "CP-AP04, 179, -2, 177",
+            "CP-AP05, 179,  0, 179",
+            "CP-AP06, 179,  2, 181",
+            "CP-AP07, 328, -2, 326",
+            "CP-AP08, 328,  0, 328",
+            "CP-AP09, 328,  2, 328"
     })
     public void testAct_CajaNegra(String idCaso, int xInicial, int dx, int xEsperado) {
         player.setX(xInicial);
