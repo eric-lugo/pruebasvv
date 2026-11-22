@@ -16,6 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardInitTest {
 
     @Test
+    @DisplayName("CP-B01: Comprobar que al crear un Board se inicializa el tablero correctamente")
+    public void testCP_B01_InicializacionTablero() {
+        Board board = new Board();
+
+        assertNotNull(board, "La instancia de Board debe haberse creado correctamente.");
+
+        assertNotNull(board.getPlayer(), "El jugador (Player) debe estar inicializado tras instanciar el tablero.");
+        assertNotNull(board.getShot(), "El objeto disparo (Shot) debe estar inicializado tras la instanciación.");
+        assertNotNull(board.getAliens(), "La lista de alienígenas no debe ser nula tras la inicialización.");
+
+        assertFalse(board.getAliens().isEmpty(), "La lista de alien�genas no debe estar vac�a al iniciar el juego.");
+    }
+
+    @Test
     @DisplayName("CP-B02: Comprobar creación de 24 aliens")
     public void testCP_B02_CreacionAliens() throws Exception {
         Board board = new Board();
@@ -83,18 +97,6 @@ public class BoardInitTest {
         assertNotNull(shot, "El objeto Shot debe estar instanciado tras la inicialización del tablero.");
     }
 
-    @Test
-    @DisplayName("CP-B01: Comprobar que al crear un Board se inicializa el tablero correctamente")
-    public void testCP_B01_InicializacionTablero() {
-        Board board = new Board();
 
-        assertNotNull(board, "La instancia de Board debe haberse creado correctamente.");
-
-        assertNotNull(board.getPlayer(), "El jugador (Player) debe estar inicializado tras instanciar el tablero.");
-        assertNotNull(board.getShot(), "El objeto disparo (Shot) debe estar inicializado tras la instanciación.");
-        assertNotNull(board.getAliens(), "La lista de alienígenas no debe ser nula tras la inicialización.");
-
-        assertFalse(board.getAliens().isEmpty(), "La lista de alien�genas no debe estar vac�a al iniciar el juego.");
-    }
 
 }
