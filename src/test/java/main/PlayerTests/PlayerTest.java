@@ -81,62 +81,6 @@ public class PlayerTest {
         assertEquals(yEsperado, player.getY());
     }
 
-    @Test
-    public void testActSinMovimiento(){
-        player.setX(179);
-        setDxPrivate(player, 0);
-        player.act();
-        assertEquals(179, player.getX());
-    }
-
-    @Test
-    public void testActMovimientoDerecha(){
-        player.setX(179);
-        setDxPrivate(player, 2);
-        player.act();
-        assertEquals(181, player.getX());
-    }
-
-    @Test
-    public void testActMovimientoIzquierda(){
-        player.setX(179);
-        setDxPrivate(player, -2);
-        player.act();
-        assertEquals(177, player.getX());
-    }
-
-    @Test
-    public void testActMovDerBorde(){
-        player.setX(341);
-        setDxPrivate(player, 2);
-        player.act();
-        assertEquals(343, player.getX());
-    }
-
-    @Test
-    public void testActMovIzqBorde(){
-        player.setX(2);
-        setDxPrivate(player, -2);
-        player.act();
-        assertEquals(0, player.getX());
-    }
-
-    @Test
-    public void testActDerNoMovimiento(){
-        player.setX(343);
-        setDxPrivate(player, 2);
-        player.act();
-        assertEquals(343, player.getX());
-    }
-
-    @Test
-    public void testActIzqNoMovimiento(){
-        player.setX(0);
-        setDxPrivate(player, -2);
-        player.act();
-        assertEquals(0, player.getX());
-    }
-
     @ParameterizedTest(name = "{0}: x={1}, dx={2} -> xEsperado={3}")
     @CsvSource({
             "CP-PL03 (Movimiento derecha normal),      179,  2, 181",
