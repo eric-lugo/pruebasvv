@@ -54,7 +54,7 @@ public class UpdateBombWhiteBox {
 
         ejecutarUpdateBomb();
 
-        assertTrue(board.getAliens().isEmpty(), "La lista de aliens debe seguir vacía");
+        assertTrue(board.getAliens().isEmpty(), "la lista de aliens debe seguir vacía");
     }
 
     @Test
@@ -66,8 +66,8 @@ public class UpdateBombWhiteBox {
         bomb.setDestroyed(true);
         ponerAliens(alien);
 
-        assertFalse(alien.isVisible(), "El alien debería no estar visible");
-        assertTrue(bomb.isDestroyed(), "La bomba debería estar destruida");
+        assertFalse(alien.isVisible(), "el alien debería no estar visible");
+        assertTrue(bomb.isDestroyed(), "la bomba debería estar destruida");
 
         ejecutarUpdateBomb();
 
@@ -81,7 +81,7 @@ public class UpdateBombWhiteBox {
         Alien alien = null;
         Alien.Bomb bomb = null;
 
-        for (int intento = 0; intento < 200 && !disparada; intento++) {
+        for (int intento = 0; intento < 100 && !disparada; intento++) {
             alien = new Alien(ALIEN_X, ALIEN_Y);
             bomb = alien.getBomb();
             bomb.setDestroyed(true);
@@ -96,11 +96,34 @@ public class UpdateBombWhiteBox {
         }
 
         assertTrue(disparada, "el alien debe haber disparado la bomba cuando rand == Commons.CHANCE");
-        final Alien.Bomb bombFinal = bomb;
+        final Alien.Bomb bombF = bomb;
         assertAll(
-                () -> assertFalse(bombFinal.isDestroyed(), "la bomba debe quedar activa"),
-                () -> assertEquals(ALIEN_X, bombFinal.getX(), "la bomba debe iniciar en X del alien")
+                () -> assertFalse(bombF.isDestroyed(), "la bomba debe quedar activa"),
+                () -> assertEquals(ALIEN_X, bombF.getX(), "la bomba debe iniciar en las coordenadas del alien")
         );
     }
+
+    @Test
+    @DisplayName("C4: [1,2,3,4,6,7,8,10,2,F] -> bomba activa pero no hay colisión con el jugador")
+    void c4_bombaActivaSinColision() throws Exception {
+        Alien alien = new Alien(ALIEN_X, ALIEN_Y);
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setDestroyed(false);
+        bomb.setX(100);
+        bomb.setY(100);
+        ponerAliens(alien);
+
+        Player player = board.getPlayer();
+        player.setX(PLAYER_X);
+        player.setY(PLAYER_Y);
+
+        ejecutarUpdateBomb();
+
+        assertAll(
+                () -> assertFalse(bomb.isDestroyed(), "la bomba debe seguir activa al no tocar al jugador ni el suelo"),
+                () -> assertFalse(player.isDying(), "el jugador no debe morir")
+        );
+    }
+
 }
 
