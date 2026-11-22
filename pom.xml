@@ -15,7 +15,7 @@
     </properties>
 
     <dependencies>
-        <!-- JAR del juego original (carpeta lib/) -->
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>Space-Invaders-Original</artifactId>
@@ -24,11 +24,18 @@
             <systemPath>${project.basedir}/lib/Space-Invaders.jar</systemPath>
         </dependency>
 
-        <!-- junit-jupiter incluye la API y el motor para poder ejecutar los tests -->
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
+            <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

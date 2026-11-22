@@ -1,4 +1,4 @@
-package main;
+package main.AlienTest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
